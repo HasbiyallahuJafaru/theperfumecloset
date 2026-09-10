@@ -118,7 +118,7 @@ export function CartDrawer() {
                   <Link
                     href={`/fragrance/${fragrance.slug}`}
                     onClick={handleClose}
-                    className="relative h-[104px] w-[78px] shrink-0 overflow-hidden bg-surface-card"
+                    className="frame-oval relative h-[104px] w-[78px] shrink-0 overflow-hidden bg-surface-card"
                   >
                     <Image
                       src={fragrance.images[0]}

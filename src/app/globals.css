@@ -109,6 +109,13 @@ a {
   font-variant-numeric: tabular-nums;
 }
 
+/* The house frame: a vertical oval. Horizontal radius is the full half-width so
+   the sides bow fully; the vertical radius stays under half-height so the top
+   and bottom keep some body rather than closing into a true ellipse. */
+.frame-oval {
+  border-radius: 50% / 38%;
+}
+
 /* --- Type roles ----------------------------------------------------------
    Weight is always 400. Emphasis comes from size, tracking, case and family.
 ------------------------------------------------------------------------- */

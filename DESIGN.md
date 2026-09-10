@@ -97,8 +97,22 @@ and from the narrow gap between `canvas` (#000) and `surface-card` (#141414). Di
 
 ## Shape
 
-Binary radius: **0px for everything**, `pill` for buttons only. No 4px, no 8px, no 12px —
-intermediate radii read as consumer-tech rather than engineered luxury.
+Three shapes, and only three. No 4px, no 8px, no 12px — intermediate radii read as
+consumer-tech rather than couture.
+
+- **0px** — the default. Full-bleed bands, dividers, inputs, spec cells.
+- **pill** (`9999px`) — buttons only.
+- **`.frame-oval`** (`border-radius: 50% / 38%`) — the house frame for *contained* product and
+  editorial imagery: fragrance cards, the product gallery and its thumbnails, cart line
+  thumbnails, the contained editorial portrait. A vertical oval — the horizontal radius is the
+  full half-width so the sides bow completely, while the vertical radius stays under half-height
+  so the top and bottom keep some body instead of closing into a true ellipse.
+
+The oval never applies to full-bleed imagery — the hero, the about banner and the CTA band stay
+rectangular and edge-to-edge. An oval that touches the viewport edge stops reading as a frame.
+
+Inside an oval frame, an edge-anchored indicator (an underline, a bottom bar) is clipped to a
+sliver. Use a `outline` ring, which follows the curve.
 
 ## Components
 

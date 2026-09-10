@@ -15,7 +15,7 @@ export function FragranceCard({
 
   return (
     <Link href={`/fragrance/${fragrance.slug}`} className="group block">
-      <div className="relative aspect-[4/5] overflow-hidden bg-surface-card">
+      <div className="frame-oval relative aspect-[4/5] overflow-hidden bg-surface-card">
         <Image
           src={fragrance.images[0]}
           alt={`${fragrance.name} — ${fragrance.concentration}`}

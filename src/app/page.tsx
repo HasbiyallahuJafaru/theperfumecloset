@@ -52,7 +52,7 @@ export default function HomePage() {
 
       <section className="border-y border-hairline">
         <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-5 py-20 sm:px-8 sm:py-[120px] lg:grid-cols-2 lg:gap-20">
-          <Reveal className="relative aspect-[4/5] overflow-hidden bg-surface-card lg:aspect-[3/4]">
+          <Reveal className="frame-oval relative aspect-[4/5] overflow-hidden bg-surface-card lg:aspect-[3/4]">
             <Image
               src={editorial.still}
               alt=""
