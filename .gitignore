@@ -45,3 +45,6 @@ yarn-error.log*
 
 # Machine-local npm config (Avast TLS workaround) — must not reach the deploy target.
 .npmrc
+
+.vercel
+.env*
