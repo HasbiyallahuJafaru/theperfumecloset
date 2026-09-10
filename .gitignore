@@ -42,3 +42,6 @@ yarn-error.log*
 # agent-generated
 /AGENTS.md
 /CLAUDE.md
+
+# Machine-local npm config (Avast TLS workaround) — must not reach the deploy target.
+.npmrc

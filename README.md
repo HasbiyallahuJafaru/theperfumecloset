@@ -12,19 +12,44 @@ npm run dev
 
 Then open the URL it prints (http://localhost:3000, or the next free port).
 
-### Why there is an `.npmrc`
+### If `npm install` hangs or images render broken locally
 
-This machine runs Avast/AVG HTTPS scanning, which re-signs TLS connections with a locally
-installed root certificate. Node ships its own CA bundle and ignores the Windows certificate
-store, so **without the flag in `.npmrc` every outbound HTTPS request from Node fails** with
-`UNABLE_TO_VERIFY_LEAF_SIGNATURE` — `npm install` hangs, and the `next/image` optimizer
-cannot fetch product photography, so images render broken.
+Machines running Avast/AVG HTTPS scanning re-sign TLS connections with a locally installed
+root certificate. Node ships its own CA bundle and ignores the Windows certificate store, so
+every outbound HTTPS request from Node fails with `UNABLE_TO_VERIFY_LEAF_SIGNATURE` —
+`npm install` hangs, and the `next/image` optimizer cannot fetch photography.
 
-`.npmrc` sets `node-options=--use-system-ca`, which keeps certificate verification **on** and
-simply trusts the same roots Windows trusts. It needs Node 22.15+ or 24+ (you are on 24.19).
+Fix it with a **local, untracked** `.npmrc` in the project root:
 
-If you move this project to a machine without AV TLS interception, the file is harmless and
-can stay.
+```
+node-options=--use-system-ca
+```
+
+That keeps certificate verification on and trusts the same roots Windows trusts. Requires
+Node 22.15+ or 24+.
+
+`.npmrc` is deliberately **gitignored**. The flag is machine-specific and must not reach a
+build server: `NODE_OPTIONS` applies to every Node process, and on a builder running Node
+older than 22.15 the unrecognised flag kills each one and the deploy fails.
+
+## Deploying to Vercel
+
+Vercel auto-detects Next.js — no `vercel.json` is needed, and adding one usually makes things
+worse.
+
+1. Import the repo at [vercel.com/new](https://vercel.com/new).
+2. **Framework Preset:** Next.js. **Root Directory:** `./` — leave it empty/root. Pointing it
+   at a subfolder is the most common cause of a 404 on an otherwise healthy project.
+3. Build command, output directory and install command: leave all on the defaults.
+4. No environment variables are required.
+
+**Getting a 404 on a fresh deploy?** The usual causes, in order:
+
+- **The project was imported while the repo was still empty.** There was nothing to build, so
+  every route 404s. Push first, then redeploy — Deployments → ⋯ → Redeploy.
+- **Root Directory points at a subfolder.** Reset it to the repository root.
+- **The deployment built an older commit.** Check the commit hash on the deployment and
+  redeploy from the latest `main`.
 
 ## Structure
 

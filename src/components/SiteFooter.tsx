@@ -40,8 +40,9 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-[1.2fr_repeat(3,1fr)] md:gap-8">
           <Newsletter />
 
+          {/* Link columns are desktop-only; mobile keeps the newsletter and the base row. */}
           {columns.map((col) => (
-            <nav key={col.heading} aria-label={col.heading}>
+            <nav key={col.heading} aria-label={col.heading} className="hidden md:block">
               <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-soft">
                 {col.heading}
               </h2>
