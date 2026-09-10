@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   The Perfume Closet — design tokens. See DESIGN.md.
+   Monochrome only. The single non-monochrome token is --color-link.
+--------------------------------------------------------------------------- */
+
+@theme {
+  --color-canvas: #000000;
+  --color-surface-soft: #0d0d0d;
+  --color-surface-card: #141414;
+  --color-surface-elevated: #1f1f1f;
+
+  --color-ink: #ffffff;
+  --color-body: #cccccc;
+  --color-body-strong: #e6e6e6;
+  --color-muted: #999999;
+  --color-muted-soft: #666666;
+
+  --color-hairline: #262626;
+  --color-hairline-strong: #3a3a3a;
+
+  --color-link: #c3d9f3;
+  --color-warning: #d4a017;
+  --color-success: #5fa657;
+
+  --font-display: var(--font-bodoni), Didot, "Bodoni MT", "Times New Roman", serif;
+  --font-text: var(--font-cormorant), Garamond, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", "Cascadia Mono", monospace;
+
+  --spacing-section: 120px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Base ---------------------------------------------------------------- */
+
+html {
+  background-color: var(--color-canvas);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-body);
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* --- Browser surfaces ----------------------------------------------------
+   These ship with browser defaults that belong to no design system.
+------------------------------------------------------------------------- */
+
+::selection {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+:root {
+  caret-color: var(--color-ink);
+  accent-color: var(--color-ink);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-hairline-strong);
+  border: 3px solid var(--color-canvas);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-soft);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-hairline-strong) var(--color-canvas);
+}
+
+:focus-visible {
+  outline: 1px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+a {
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+/* Prices, sizes and note counts must not shift width as they change. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Type roles ----------------------------------------------------------
+   Weight is always 400. Emphasis comes from size, tracking, case and family.
+------------------------------------------------------------------------- */
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.t-body {
+  font-family: var(--font-text);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 68ch;
+}
+
+.t-wordmark {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+/* --- The one authored motion moment --------------------------------------
+   Content rises into place from an already-visible default, so a failed
+   observer or disabled JS never hides content.
+------------------------------------------------------------------------- */
+
+.rise {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(6px);
+    transition:
+      opacity 1100ms var(--ease-out-expo),
+      transform 1100ms var(--ease-out-expo),
+      filter 1100ms var(--ease-out-expo);
+  }
+  .rise[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
