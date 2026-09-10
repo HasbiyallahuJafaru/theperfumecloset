@@ -1,7 +1,7 @@
 ---
 version: 1
 name: The-Perfume-Closet
-description: An austere luxury interface on pure black, carrying white uppercase letterspaced display type and full-bleed fragrance photography as the only visual voltage. No accent colour, no gradients, no shadows, no decorative chrome. Adapted from the Bugatti design language (voltagent/awesome-design-md) for a niche perfume house.
+description: An austere luxury interface on pure black, carrying a white fat-serif display voice in title case and full-bleed fragrance photography as the only visual voltage. No accent colour, no gradients, no shadows, no decorative chrome. Structure adapted from the Bugatti design language (voltagent/awesome-design-md); the display face departs from it deliberately.
 
 colors:
   primary: "#ffffff"
@@ -39,7 +39,7 @@ spacing:
 
 ## Overview
 
-Pure black canvas holding white uppercase display type and full-bleed photography. The empty
+Pure black canvas holding a white fat-serif display voice and full-bleed photography. The empty
 space, the photograph, and the precisely-tracked headline *are* the brand. There is no accent
 colour, no shadow, no gradient, no card decoration. This system has no light mode.
 
@@ -49,7 +49,7 @@ Three families, functionally split, split is absolute:
 
 | Role | Face | Use |
 |---|---|---|
-| **Display** | Bodoni Moda (400) | All headlines, the wordmark, fragrance names. UPPERCASE, wide-tracked. |
+| **Display** | Fraunces (700, `SOFT` 100, `WONK` 1) | All headlines and fragrance names. **Title Case**, tracking −0.015em. |
 | **Text** | Cormorant Garamond (400) | Running body copy only. Sentence case, no tracking. |
 | **Mono** | JetBrains Mono (400) | Buttons, nav, captions, prices, metadata. UPPERCASE, 2–2.5px tracking. |
 
@@ -57,31 +57,42 @@ Never a display face in a button. Never mono in a paragraph. Never the serif in 
 
 The source Bugatti system uses three licensed faces unavailable publicly; its own substitution
 note states that **preserving the three-family split matters more than matching the exact
-typeface**. Bodoni Moda replaces the suggested Saira Condensed: a high-contrast Didone is the
-established display voice of fashion and fragrance houses, and its hairline/stem contrast reads
-as couture against pure black in a way a geometric sans cannot. It holds the same uppercase,
-wide-tracked, weight-400 discipline the system requires.
+typeface**. That split is what this system keeps. The display voice itself deliberately departs
+from Bugatti's austere sans: Fraunces is a fat serif with ball terminals and curled descenders,
+chosen against a supplied reference.
 
-Bodoni is a display face. Below ~15px its hairlines thin out, so small labels, metadata and
-button text stay in the mono role rather than being set in the display face.
+**Display is set in Title Case, not uppercase.** The ball terminals and the curled `y`/`g`
+descenders exist only in the lowercase; setting this face in caps discards the entire reason it
+was chosen. `SOFT` 100 rounds the terminals and `WONK` 1 enables the alternate curved
+descenders — both are set once on `.t-display`.
+
+Fraunces is a display face. Below ~15px it gets muddy, so small labels, metadata and button
+text stay in the mono role rather than being set in the display face.
+
+The **wordmark** is the one exception: it stays UPPERCASE at 0.32em tracking and weight 600. It
+is a mark rather than a heading and has to hold its own beside the nav at 13px.
 
 ### Scale
 
 | Token | Size | Tracking | Use |
 |---|---|---|---|
-| display-xl | 64px (32px mobile) | 4px | Hero h1 |
-| display-lg | 48px | 3px | Section heads |
-| display-md | 32px | 2px | Fragrance names, sub-heads |
-| display-sm | 24px | 1.5px | Card titles |
-| wordmark | 14px | 6px | THE PERFUME CLOSET — widest tracking in the system |
-| title-md | 20px | 1px | Row titles, leads |
+| display-xl | 72px (38px mobile) | −0.015em | Hero h1 — Fraunces, Title Case |
+| display-lg | 48px | −0.015em | Section heads |
+| display-md | 32px | −0.015em | Fragrance names, sub-heads |
+| display-sm | 24px | −0.015em | Card titles |
+| wordmark | 13px | 0.32em | THE PERFUME CLOSET — uppercase, the one wide-tracked display use |
+| title-md | 20px | −0.015em | Row titles, leads |
 | caption | 11px | 2px | Captions, metadata, notes — mono |
 | body-md | 16px | 0 | Body — serif |
 | button | 14px | 2.5px | Button labels — mono |
 | nav-link | 12px | 2px | Nav items — mono |
 
-**Weight is always 400.** The system has no bold role. Emphasis comes from size, tracking,
-case, and family contrast — never weight. Bolding anything breaks the voice.
+**Display carries weight; nothing else does.** Display sits at 700 (the wordmark at 600).
+Body, mono, captions and controls stay at 400 and never bold. Emphasis inside a heading comes
+from size, never from a further weight jump.
+
+Tracking is negative on display and positive on mono. Those are the only two settings — the
+tension between a tight fat serif and a wide-tracked mono label is what carries the hierarchy.
 
 ## Layout
 
@@ -127,13 +138,16 @@ sliver. Use a `outline` ring, which follows the curve.
 
 ## Do's and Don'ts
 
-**Do** anchor every page with full-bleed photography · keep display UPPERCASE at 2–4px tracking ·
-keep buttons transparent · stay at weight 400 · hold the 120px section rhythm · theme the browser
-surfaces (selection, caret, scrollbar, focus ring) from the palette.
+**Do** anchor every page with full-bleed photography · set display in Title Case at −0.015em ·
+keep `SOFT` 100 and `WONK` 1 on display so the terminals and descenders stay characterful ·
+keep buttons transparent · hold the 120px section rhythm · theme the browser surfaces
+(selection, caret, scrollbar, focus ring) from the palette.
 
-**Don't** introduce any accent colour beyond `link` · bold anything · fill a primary button ·
-compress section whitespace · round anything except buttons · tighten display tracking · blur
-the type trinity · add an eyebrow above a heading · use emoji or unicode glyphs as icons.
+**Don't** introduce any accent colour beyond `link` · set display in uppercase (it throws away
+the ball terminals and curled descenders) · wide-track a heading · bold the body, mono or
+controls · fill a primary button · compress section whitespace · round anything except buttons
+and the oval frame · blur the type trinity · add an eyebrow above a heading · use emoji or
+unicode glyphs as icons.
 
 ## Motion
 

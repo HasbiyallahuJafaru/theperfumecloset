@@ -31,7 +31,7 @@ export function FragranceCard({
       </div>
 
       <div className="mt-6 flex items-baseline justify-between gap-4">
-        <h3 className="t-display text-[19px] tracking-[0.13em] sm:text-[21px]">
+        <h3 className="t-display text-[19px] sm:text-[21px]">
           {fragrance.name}
         </h3>
         <span className="tabular shrink-0 font-mono text-[12px] tracking-[0.1em] text-body">

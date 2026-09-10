@@ -24,7 +24,7 @@
   --color-warning: #d4a017;
   --color-success: #5fa657;
 
-  --font-display: var(--font-bodoni), Didot, "Bodoni MT", "Times New Roman", serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --font-text: var(--font-cormorant), Garamond, "Times New Roman", serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", "Cascadia Mono", monospace;
 
@@ -117,13 +117,19 @@ a {
 }
 
 /* --- Type roles ----------------------------------------------------------
-   Weight is always 400. Emphasis comes from size, tracking, case and family.
+   Display is a fat serif set in title case: the ball terminals and curled
+   descenders only exist in the lowercase, so uppercase would discard the
+   face's whole character. SOFT rounds the terminals, WONK enables the
+   alternate curved descenders.
 ------------------------------------------------------------------------- */
 
 .t-display {
   font-family: var(--font-display);
-  font-weight: 400;
-  text-transform: uppercase;
+  font-weight: 700;
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1;
+  letter-spacing: -0.015em;
   color: var(--color-ink);
 }
 
@@ -140,12 +146,15 @@ a {
   max-width: 68ch;
 }
 
+/* The wordmark stays uppercase and wide-tracked — it is a mark, not a heading,
+   and it needs to hold its own beside the nav at 13px. */
 .t-wordmark {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 100;
   text-transform: uppercase;
-  letter-spacing: 0.42em;
-  font-size: 14px;
+  letter-spacing: 0.32em;
+  font-size: 13px;
   line-height: 1;
   color: var(--color-ink);
 }

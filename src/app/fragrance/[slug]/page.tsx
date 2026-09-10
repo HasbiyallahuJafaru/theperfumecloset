@@ -67,7 +67,7 @@ export default async function FragrancePage({ params }: PageProps<"/fragrance/[s
         <ProductGallery images={fragrance.images} name={fragrance.name} />
 
         <div className="lg:pt-4">
-          <h1 className="t-display text-[32px] leading-[1.12] tracking-[0.1em] sm:text-[42px]">
+          <h1 className="t-display text-[32px] leading-[1.12] sm:text-[42px]">
             {fragrance.name}
           </h1>
           <p className="t-body mt-4 text-[17px] italic leading-relaxed text-muted">
@@ -132,7 +132,7 @@ export default async function FragrancePage({ params }: PageProps<"/fragrance/[s
       </div>
 
       <section className="mt-24 border-t border-hairline pt-16 sm:mt-[120px]">
-        <h2 className="t-display text-[24px] tracking-[0.1em] sm:text-[30px]">
+        <h2 className="t-display text-[24px] sm:text-[30px]">
           Also from the house
         </h2>
         <div className="mt-12 grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">

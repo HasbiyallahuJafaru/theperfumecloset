@@ -6,7 +6,7 @@ export default function NotFound() {
       <p className="tabular font-mono text-[11px] uppercase tracking-[0.22em] text-muted-soft">
         404
       </p>
-      <h1 className="t-display mt-6 max-w-[20ch] text-[28px] leading-[1.18] tracking-[0.1em] sm:text-[38px]">
+      <h1 className="t-display mt-6 max-w-[20ch] text-[28px] leading-[1.18] sm:text-[38px]">
         This bottle is not in the closet
       </h1>
       <p className="t-body mx-auto mt-6 max-w-[46ch] text-[16px] leading-[1.75] text-muted">

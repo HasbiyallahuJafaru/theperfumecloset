@@ -58,7 +58,7 @@ export function ContactForm() {
   if (status === "sent") {
     return (
       <div className="border border-hairline p-10 text-center">
-        <p className="t-display text-[20px] tracking-[0.14em]">Thank you</p>
+        <p className="t-display text-[20px]">Thank you</p>
         <p className="t-body mx-auto mt-4 max-w-[44ch] text-[15px] leading-relaxed text-muted">
           Your note has reached us. We answer everything ourselves, usually within two
           working days.

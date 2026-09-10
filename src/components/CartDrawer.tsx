@@ -133,7 +133,7 @@ export function CartDrawer() {
                     <Link
                       href={`/fragrance/${fragrance.slug}`}
                       onClick={handleClose}
-                      className="t-display text-[15px] tracking-[0.12em] transition-opacity duration-300 hover:opacity-70"
+                      className="t-display text-[15px] transition-opacity duration-300 hover:opacity-70"
                     >
                       {fragrance.name}
                     </Link>
@@ -252,7 +252,7 @@ function EmptyBag({ onClose }: { onClose: () => void }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-10 text-center">
       <div className="h-px w-12 bg-hairline-strong" />
-      <p className="t-display mt-8 text-[18px] tracking-[0.16em]">Your bag is empty</p>
+      <p className="t-display mt-8 text-[18px]">Your bag is empty</p>
       <p className="t-body mt-4 text-[14px] leading-relaxed text-muted">
         Six compositions, none of them a version of another. Start with the discovery set
         if you have not worn the house before.

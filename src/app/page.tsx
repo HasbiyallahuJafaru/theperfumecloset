@@ -14,15 +14,22 @@ export default function HomePage() {
       <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden">
         <div className="absolute inset-0">
           <HeroMedia poster={editorial.hero} />
-          {/* Legibility scrim, not decoration. */}
+          {/* Legibility scrim, not decoration. Weighted to the bottom so the
+              footage stays readable while the band still fades into the page. */}
           <div
             aria-hidden
-            className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/55 to-canvas/45"
+            className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/30 to-canvas/15"
+          />
+          {/* A short pool behind the centred headline only, so the type keeps
+              its contrast without dimming the whole frame. */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-1/2 h-[46%] -translate-y-1/2 bg-canvas/25 blur-3xl"
           />
         </div>
 
         <div className="relative mx-auto flex w-full max-w-[1280px] flex-col items-center px-5 py-28 text-center sm:px-8">
-          <Reveal as="h1" className="t-display max-w-[13ch] text-[38px] leading-[1.06] tracking-[0.11em] sm:text-[58px] sm:tracking-[0.1em] lg:text-[72px]">
+          <Reveal as="h1" className="t-display max-w-[13ch] text-[38px] leading-[1.06] sm:text-[58px] lg:text-[72px]">
             Your closet smells like heaven
           </Reveal>
         </div>
@@ -30,7 +37,7 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-[120px]">
         <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="t-display max-w-[14ch] text-[28px] leading-[1.15] tracking-[0.1em] sm:text-[40px]">
+          <h2 className="t-display max-w-[14ch] text-[28px] leading-[1.15] sm:text-[40px]">
             Three to begin with
           </h2>
           <Link
@@ -63,7 +70,7 @@ export default function HomePage() {
           </Reveal>
 
           <div>
-            <Reveal as="h2" className="t-display text-[28px] leading-[1.15] tracking-[0.1em] sm:text-[40px]">
+            <Reveal as="h2" className="t-display text-[28px] leading-[1.15] sm:text-[40px]">
               Worn, not displayed
             </Reveal>
 
@@ -88,7 +95,7 @@ export default function HomePage() {
                   { value: "2019", label: "First release" },
                 ].map((spec) => (
                   <div key={spec.label}>
-                    <dt className="t-display text-[19px] tracking-[0.08em]">{spec.value}</dt>
+                    <dt className="t-display text-[19px]">{spec.value}</dt>
                     <dd className="mt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-muted">
                       {spec.label}
                     </dd>
@@ -102,22 +109,16 @@ export default function HomePage() {
 
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src={editorial.cta}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover opacity-50"
-          />
-          <div aria-hidden className="absolute inset-0 bg-canvas/60" />
+          <Image src={editorial.cta} alt="" fill sizes="100vw" className="object-cover" />
+          <div aria-hidden className="absolute inset-0 bg-canvas/40" />
         </div>
 
         <div className="relative mx-auto max-w-[1280px] px-5 py-24 text-center sm:px-8 sm:py-[120px]">
-          <Reveal as="h2" className="t-display mx-auto max-w-[18ch] text-[26px] leading-[1.2] tracking-[0.1em] sm:text-[36px]">
+          <Reveal as="h2" className="t-display mx-auto max-w-[18ch] text-[26px] leading-[1.2] sm:text-[36px]">
             Wear it before you commit to it
           </Reveal>
           <Reveal delay={120}>
-            <p className="t-body mx-auto mt-6 max-w-[52ch] text-[16px] leading-[1.75] text-body">
+            <p className="t-body mx-auto mt-6 max-w-[52ch] text-[16px] leading-[1.75] text-body-strong">
               The discovery set carries all six at two millilitres each. Its cost comes off
               your first full bottle.
             </p>

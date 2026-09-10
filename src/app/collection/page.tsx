@@ -4,13 +4,13 @@ import { CollectionGrid } from "@/components/CollectionGrid";
 export const metadata: Metadata = {
   title: "The Collection",
   description:
-    "Six extrait-strength compositions from The Perfume Closet, made in batches of three hundred.",
+    "Six genderless extrait-strength compositions from The Perfume Closet.",
 };
 
 export default function CollectionPage() {
   return (
     <div className="mx-auto max-w-[1280px] px-5 pb-24 pt-32 sm:px-8 sm:pb-[120px] sm:pt-44">
-      <h1 className="t-display max-w-[16ch] text-[32px] leading-[1.12] tracking-[0.1em] sm:text-[48px]">
+      <h1 className="t-display max-w-[16ch] text-[32px] leading-[1.12] sm:text-[48px]">
         The Collection
       </h1>
       <p className="t-body mt-8 text-[16px] leading-[1.75] text-muted sm:text-[17px]">

@@ -38,7 +38,7 @@ export function Newsletter() {
 
   return (
     <div className="max-w-sm">
-      <h2 className="t-display text-[20px] tracking-[0.14em]">Correspondence</h2>
+      <h2 className="t-display text-[20px]">Correspondence</h2>
       <p className="t-body mt-4 text-[14px] leading-relaxed text-muted">
         A new composition arrives roughly once a year. This list hears about it before
         anyone else, and hears from us rarely otherwise.

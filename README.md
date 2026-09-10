@@ -34,22 +34,33 @@ older than 22.15 the unrecognised flag kills each one and the deploy fails.
 
 ## Deploying to Vercel
 
-Vercel auto-detects Next.js — no `vercel.json` is needed, and adding one usually makes things
-worse.
+`vercel.json` pins `"framework": "nextjs"`. That field overrides the dashboard preset, so the
+project builds as Next.js even if the preset was set to something else. Keep it.
 
 1. Import the repo at [vercel.com/new](https://vercel.com/new).
-2. **Framework Preset:** Next.js. **Root Directory:** `./` — leave it empty/root. Pointing it
-   at a subfolder is the most common cause of a 404 on an otherwise healthy project.
+2. **Root Directory:** `./` — leave it empty/root.
 3. Build command, output directory and install command: leave all on the defaults.
 4. No environment variables are required.
 
-**Getting a 404 on a fresh deploy?** The usual causes, in order:
+**Getting a 404 on every route?** In order of likelihood:
 
-- **The project was imported while the repo was still empty.** There was nothing to build, so
-  every route 404s. Push first, then redeploy — Deployments → ⋯ → Redeploy.
+- **Framework Preset is `Other`.** Under that preset Vercel treats the output directory as
+  `public` if it exists, publishes that folder as a static site, and ignores the `.next` build
+  entirely — so every route 404s. The tell is a production build finishing in ~15–20s with a
+  single `.` build artifact of 0ms (`vercel inspect <url>` shows this). The committed
+  `vercel.json` now prevents it.
+- **The project was imported while the repo was still empty.** Nothing to build. Push first,
+  then redeploy — Deployments → ⋯ → Redeploy.
 - **Root Directory points at a subfolder.** Reset it to the repository root.
-- **The deployment built an older commit.** Check the commit hash on the deployment and
-  redeploy from the latest `main`.
+- **The deployment built an older commit.** Check the hash on the deployment.
+
+Useful for diagnosis:
+
+```bash
+npx vercel ls <project>          # deployment list — watch the build durations
+npx vercel inspect <url>         # per-deployment build artifacts
+npx vercel project inspect <p>   # framework preset, root directory, node version
+```
 
 ## Structure
 
@@ -92,5 +103,5 @@ Everything below is placeholder and is **not** real business truth:
   your own product imagery.
 - Design language adapted from the Bugatti `DESIGN.md` in
   [voltagent/awesome-design-md](https://github.com/voltagent/awesome-design-md).
-- Typefaces: Bodoni Moda (display), Cormorant Garamond (body), JetBrains Mono (labels) —
+- Typefaces: Fraunces (display), Cormorant Garamond (body), JetBrains Mono (labels) —
   all SIL Open Font License, self-hosted in `src/fonts/`.

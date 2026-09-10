@@ -8,14 +8,14 @@ import { CartDrawer } from "@/components/CartDrawer";
 
 // Self-hosted: no build-time or runtime dependency on a font CDN.
 
-// Variable weight axis 400–900; the design system only ever calls 400.
-const bodoni = localFont({
-  src: "../fonts/BodoniModa.woff2",
-  weight: "400 900",
+// Variable: weight 100–900 plus SOFT and WONK axes, set in globals.css.
+const fraunces = localFont({
+  src: "../fonts/Fraunces.woff2",
+  weight: "100 900",
   style: "normal",
   display: "swap",
-  variable: "--font-bodoni",
-  fallback: ["Didot", "Bodoni MT", "Times New Roman", "serif"],
+  variable: "--font-fraunces",
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 const cormorant = localFont({
@@ -57,7 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${bodoni.variable} ${cormorant.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${cormorant.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-canvas text-body">
         <CartProvider>

@@ -41,7 +41,7 @@ export default function AboutPage() {
   return (
     <>
       <section className="mx-auto max-w-[1280px] px-5 pb-20 pt-32 sm:px-8 sm:pb-[120px] sm:pt-44">
-        <h1 className="t-display max-w-[18ch] text-[32px] leading-[1.12] tracking-[0.1em] sm:text-[48px]">
+        <h1 className="t-display max-w-[18ch] text-[32px] leading-[1.12] sm:text-[48px]">
           A house the size of a closet
         </h1>
         <p className="t-body mt-8 text-[17px] leading-[1.75] text-body-strong sm:text-[18px]">
@@ -69,7 +69,7 @@ export default function AboutPage() {
             className="scroll-mt-24 border-b border-hairline py-20 last:border-b-0 sm:py-[120px]"
           >
             <div className="grid gap-8 lg:grid-cols-[minmax(0,22ch)_1fr] lg:gap-20">
-              <Reveal as="h2" className="t-display text-[26px] leading-[1.18] tracking-[0.1em] sm:text-[34px]">
+              <Reveal as="h2" className="t-display text-[26px] leading-[1.18] sm:text-[34px]">
                 {chapter.heading}
               </Reveal>
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
 
       <section className="border-t border-hairline">
         <div className="mx-auto max-w-[1280px] px-5 py-20 text-center sm:px-8 sm:py-[120px]">
-          <Reveal as="h2" className="t-display mx-auto max-w-[20ch] text-[26px] leading-[1.2] tracking-[0.1em] sm:text-[34px]">
+          <Reveal as="h2" className="t-display mx-auto max-w-[20ch] text-[26px] leading-[1.2] sm:text-[34px]">
             Six compositions. That is the whole house.
           </Reveal>
           <Reveal delay={140}>

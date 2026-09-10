@@ -30,7 +30,7 @@ const notes = [
 export default function ContactPage() {
   return (
     <div className="mx-auto max-w-[1280px] px-5 pb-24 pt-32 sm:px-8 sm:pb-[120px] sm:pt-44">
-      <h1 className="t-display max-w-[16ch] text-[32px] leading-[1.12] tracking-[0.1em] sm:text-[48px]">
+      <h1 className="t-display max-w-[16ch] text-[32px] leading-[1.12] sm:text-[48px]">
         Write to us
       </h1>
       <p className="t-body mt-8 text-[16px] leading-[1.75] text-muted sm:text-[17px]">
@@ -49,7 +49,7 @@ export default function ContactPage() {
             <ul className="mt-6">
               {stockists.map((s) => (
                 <li key={s.name} className="border-b border-hairline py-5 last:border-b-0">
-                  <p className="t-display text-[15px] tracking-[0.12em]">{s.name}</p>
+                  <p className="t-display text-[15px]">{s.name}</p>
                   <p className="t-body mt-1.5 text-[14px] text-muted">{s.detail}</p>
                   <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-soft">
                     {s.city}

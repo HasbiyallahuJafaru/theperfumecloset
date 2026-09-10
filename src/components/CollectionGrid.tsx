@@ -58,7 +58,7 @@ export function CollectionGrid() {
 
       {shown.length === 0 ? (
         <div className="py-28 text-center">
-          <p className="t-display text-[18px] tracking-[0.14em]">Nothing in this family yet</p>
+          <p className="t-display text-[18px]">Nothing in this family yet</p>
           <p className="t-body mx-auto mt-4 max-w-[44ch] text-[15px] leading-relaxed text-muted">
             The house releases one composition a year. Ask to be told when the next arrives.
           </p>
