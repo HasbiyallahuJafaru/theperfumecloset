@@ -34,9 +34,10 @@ export default function HomePage() {
         <div className="relative mx-auto flex w-full max-w-[1280px] flex-col items-center px-5 py-32 text-center sm:px-8">
           <Reveal
             as="h1"
-            className="t-display max-w-[13ch] text-[42px] leading-[1.04] sm:text-[64px] lg:text-[82px]"
+            className="t-display max-w-[18ch] text-[30px] leading-[1.16] sm:text-[42px] lg:text-[54px]"
           >
-            Your closet smells like heaven
+            Every entrance leaves an impression.
+            <span className="block">We make sure yours lingers.</span>
           </Reveal>
           <Reveal delay={160} className="flex flex-col items-center">
             <span aria-hidden className="rule-gold mt-9 w-16" />

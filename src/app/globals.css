@@ -261,7 +261,21 @@ a {
     padding: 0 24px;
     text-align: center;
     background-color: var(--color-canvas);
-    animation: intro-out 650ms var(--ease-out-expo) 1800ms forwards;
+    animation: intro-out 650ms var(--ease-out-expo) 2100ms forwards;
+  }
+
+  .intro-mark {
+    display: block;
+    width: auto;
+    height: 86px;
+    margin: 0 auto 30px;
+    animation: intro-fade-up 900ms var(--ease-out-expo) both;
+  }
+
+  @media (min-width: 640px) {
+    .intro-mark {
+      height: 112px;
+    }
   }
 
   /* The wordmark's tracking leaves a trailing space after the last letter, so a
@@ -269,7 +283,7 @@ a {
      back, and rides the same curve as the tracking. */
   .intro-word {
     margin-right: -0.3em;
-    animation: intro-word-in 1000ms var(--ease-out-expo) 100ms both;
+    animation: intro-word-in 1000ms var(--ease-out-expo) 380ms both;
   }
 
   .intro-rule {
@@ -278,12 +292,12 @@ a {
     height: 1px;
     margin: 26px auto 0;
     background-color: var(--color-gold);
-    animation: intro-rule-in 700ms var(--ease-out-expo) 650ms both;
+    animation: intro-rule-in 700ms var(--ease-out-expo) 900ms both;
   }
 
   .intro-tagline {
     margin-top: 22px;
-    animation: intro-fade-up 800ms var(--ease-out-expo) 950ms both;
+    animation: intro-fade-up 800ms var(--ease-out-expo) 1200ms both;
   }
 
   @keyframes intro-out {

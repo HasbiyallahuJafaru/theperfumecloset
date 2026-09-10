@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import localFont from "next/font/local";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart";
@@ -66,6 +67,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             it clears itself even if JavaScript never runs. See globals.css. */}
         <div className="intro on-black" aria-hidden>
           <div>
+            <Image
+              src="/logo-mark.png"
+              alt=""
+              width={549}
+              height={640}
+              priority
+              sizes="112px"
+              className="intro-mark"
+            />
             <p className="t-wordmark intro-word text-[13px] sm:text-[19px]">
               The Perfume Closet
             </p>

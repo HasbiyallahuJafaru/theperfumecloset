@@ -185,8 +185,9 @@ frame · put a circular frame on full-bleed imagery · use emoji or unicode glyp
 
 ## The opening
 
-A Signature Black panel carrying the house lockup — wordmark, gold rule, tagline — played on
-every page load and lasting 2.45s. It is **entirely CSS**: it animates out to
+A Signature Black panel carrying the house lockup — the monogram, wordmark, gold rule and
+tagline — played on
+every page load and lasting 2.75s. It is **entirely CSS**: it animates out to
 `visibility: hidden` on `forwards` and stays there, which makes it inert with no script, no
 state and no client component, and clears it even with JavaScript disabled. Reduced motion
 skips it outright.

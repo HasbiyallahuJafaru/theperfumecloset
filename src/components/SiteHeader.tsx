@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -68,10 +69,18 @@ export function SiteHeader() {
           href="/"
           className="absolute left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5"
         >
-          <span className="t-wordmark whitespace-nowrap text-[11px] sm:text-[13px] md:text-[15px]">
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={549}
+            height={640}
+            priority
+            sizes="32px"
+            className="h-6 w-auto sm:h-7"
+          />
+          <span className="t-wordmark whitespace-nowrap text-[10px] sm:text-[11px] md:text-[12px]">
             The Perfume Closet
           </span>
-          <span aria-hidden className="rule-gold w-8 sm:w-12" />
         </Link>
 
         <div className="flex flex-1 items-center justify-end gap-8">

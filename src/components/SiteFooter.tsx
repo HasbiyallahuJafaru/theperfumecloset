@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { fragrances } from "@/lib/fragrances";
 import { Newsletter } from "@/components/Newsletter";
@@ -63,6 +64,14 @@ export function SiteFooter() {
 
         {/* The house lockup, set the way the brand sheet closes: mark, rule, tagline. */}
         <div className="mt-20 flex flex-col items-center border-t border-hairline pt-16">
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={549}
+            height={640}
+            sizes="72px"
+            className="mb-7 h-14 w-auto sm:h-16"
+          />
           <p className="t-wordmark text-center text-[13px] sm:text-[17px]">
             The Perfume Closet
           </p>
