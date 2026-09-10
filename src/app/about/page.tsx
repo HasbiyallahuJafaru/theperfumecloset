@@ -40,11 +40,14 @@ const chapters = [
 export default function AboutPage() {
   return (
     <>
-      <section className="mx-auto max-w-[1280px] px-5 pb-20 pt-32 sm:px-8 sm:pb-[120px] sm:pt-44">
-        <h1 className="t-display max-w-[18ch] text-[32px] leading-[1.12] sm:text-[48px]">
+      <section className="mx-auto max-w-[1280px] px-5 pb-20 pt-36 sm:px-8 sm:pb-[120px] sm:pt-48">
+        <span className="t-label text-[11px] text-gold-ink">The House</span>
+        <span aria-hidden className="rule-gold mt-4" />
+        <h1 className="t-display mt-6 max-w-[18ch] text-[38px] leading-[1.08] sm:text-[56px]">
           A house the size of a closet
         </h1>
-        <p className="t-body mt-8 text-[17px] leading-[1.75] text-body-strong sm:text-[18px]">
+        <p className="t-tagline mt-6 text-[19px]">…elegance in every bottle</p>
+        <p className="t-body mt-8 text-[18px] leading-[1.75] text-body-strong sm:text-[19px]">
           Six fragrances. Never more than six. Everything below explains what that
           constraint buys, and what it costs us.
         </p>
@@ -61,23 +64,31 @@ export default function AboutPage() {
         />
       </div>
 
-      <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
-        {chapters.map((chapter) => (
+      {chapters.map((chapter, i) => (
+        <div
+          key={chapter.id}
+          className={i % 2 === 1 ? "border-y border-hairline bg-surface-soft" : ""}
+        >
           <section
-            key={chapter.id}
             id={chapter.id}
-            className="scroll-mt-24 border-b border-hairline py-20 last:border-b-0 sm:py-[120px]"
+            className="mx-auto max-w-[1280px] scroll-mt-28 px-5 py-20 sm:px-8 sm:py-[120px]"
           >
             <div className="grid gap-8 lg:grid-cols-[minmax(0,22ch)_1fr] lg:gap-20">
-              <Reveal as="h2" className="t-display text-[26px] leading-[1.18] sm:text-[34px]">
-                {chapter.heading}
+              <Reveal>
+                <span className="tabular t-label text-[11px] text-gold-ink">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span aria-hidden className="rule-gold mt-4" />
+                <h2 className="t-display mt-6 text-[30px] leading-[1.14] sm:text-[38px]">
+                  {chapter.heading}
+                </h2>
               </Reveal>
 
               <Reveal delay={120}>
                 {chapter.body.map((paragraph, j) => (
                   <p
                     key={j}
-                    className={`t-body text-[16px] leading-[1.8] sm:text-[17px] ${
+                    className={`t-body text-[17px] leading-[1.8] sm:text-[18px] ${
                       j === 0 ? "text-body-strong" : "mt-6 text-muted"
                     }`}
                   >
@@ -87,12 +98,16 @@ export default function AboutPage() {
               </Reveal>
             </div>
           </section>
-        ))}
-      </div>
+        </div>
+      ))}
 
-      <section className="border-t border-hairline">
-        <div className="mx-auto max-w-[1280px] px-5 py-20 text-center sm:px-8 sm:py-[120px]">
-          <Reveal as="h2" className="t-display mx-auto max-w-[20ch] text-[26px] leading-[1.2] sm:text-[34px]">
+      <section className="on-black bg-canvas">
+        <div className="mx-auto flex max-w-[1280px] flex-col items-center px-5 py-24 text-center sm:px-8 sm:py-[120px]">
+          <Reveal className="flex flex-col items-center">
+            <span className="t-label text-[11px] text-gold">The Collection</span>
+            <span aria-hidden className="rule-gold mt-4" />
+          </Reveal>
+          <Reveal as="h2" className="t-display mt-6 max-w-[20ch] text-[30px] leading-[1.16] sm:text-[42px]">
             Six compositions. That is the whole house.
           </Reveal>
           <Reveal delay={140}>

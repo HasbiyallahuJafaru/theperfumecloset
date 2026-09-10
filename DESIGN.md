@@ -1,30 +1,35 @@
 ---
-version: 1
+version: 2
 name: The-Perfume-Closet
-description: An austere luxury interface on pure black, carrying a white fat-serif display voice in title case and full-bleed fragrance photography as the only visual voltage. No accent colour, no gradients, no shadows, no decorative chrome. Structure adapted from the Bugatti design language (voltagent/awesome-design-md); the display face departs from it deliberately.
+description: A warm, light luxury interface built on the house brand sheet — Closet Ivory ground, Soft Cream alternates, Signature Black bands, and Closet Gold used only as an edge. One high-contrast garamond does all three type jobs, separated by weight, case and tracking. Contained imagery sits in a circular frame.
 
 colors:
-  primary: "#ffffff"
-  ink: "#ffffff"
-  body: "#cccccc"
-  body-strong: "#e6e6e6"
-  muted: "#999999"
-  muted-soft: "#666666"
-  hairline: "#262626"
-  hairline-strong: "#3a3a3a"
-  canvas: "#000000"
-  surface-soft: "#0d0d0d"
-  surface-card: "#141414"
-  surface-elevated: "#1f1f1f"
-  on-primary: "#000000"
-  on-dark: "#ffffff"
-  link: "#c3d9f3"
-  warning: "#d4a017"
-  success: "#5fa657"
+  primary: "#b58a4a"
+  ivory: "#f8f5ef"
+  cream: "#efe8dc"
+  signature: "#0a0a0a"
+  charcoal: "#292725"
+  gold: "#b58a4a"
+  gold-soft: "#d5b77a"
+  gold-ink: "#8a6a34"
+  canvas: "#f8f5ef"
+  surface-soft: "#efe8dc"
+  surface-card: "#efe8dc"
+  surface-elevated: "#e6ddcc"
+  ink: "#0a0a0a"
+  body: "#292725"
+  body-strong: "#171614"
+  muted: "#57514a"
+  muted-soft: "#6f685f"
+  hairline: "#e2dacb"
+  hairline-strong: "#c9bea8"
+  warning: "#8f3a2e"
+  success: "#4f6b45"
 
 rounded:
   none: 0px
   pill: 9999px
+  circle: 9999px
 
 spacing:
   xxs: 4px
@@ -39,118 +44,162 @@ spacing:
 
 ## Overview
 
-Pure black canvas holding a white fat-serif display voice and full-bleed photography. The empty
-space, the photograph, and the precisely-tracked headline *are* the brand. There is no accent
-colour, no shadow, no gradient, no card decoration. This system has no light mode.
+The system is the brand sheet: Closet Ivory as the ground, Soft Cream for alternate bands,
+Signature Black reserved for the hero, the closing calls and the footer, and Closet Gold used
+sparingly — as a line, an edge, a mark, a hover fill. Never as a slab of colour.
 
-## The type trinity
+The whitespace and the photography carry the page. There are no shadows, no gradients used as
+decoration, and no second accent colour.
 
-Three families, functionally split, split is absolute:
+## Two grounds, one token set
 
-| Role | Face | Use |
+Every component is written against semantic tokens (`canvas`, `ink`, `body`, `hairline`,
+`gold`, …) and never against a literal. The light ground is the default. A band that should be
+Signature Black gets the **`.on-black`** class, which re-points every one of those tokens for
+its subtree — including swapping Closet Gold for Champagne Gold, which is the cast of gold that
+holds against black.
+
+```html
+<section class="on-black bg-canvas"> … </section>
+```
+
+That is the whole mechanism. Nothing inside the band needs to know which ground it is on.
+
+The three brand literals — `ivory`, `cream`, `signature` — never flip. They exist for the cases
+where a value must survive the ground change, such as a button label that sits on a gold fill.
+
+Role classes live in `@layer components` so that any Tailwind utility beats them. Do not move
+them out of the layer: unlayered, `.t-display`'s own colour would silently outrank every
+`text-*` utility placed beside it.
+
+## Gold, and where it may go
+
+Closet Gold `#b58a4a` fails contrast as running text on ivory (2.9:1). The palette therefore
+splits into three tokens, and the split is not optional:
+
+| Token | Value on ivory | Use |
 |---|---|---|
-| **Display** | Fraunces (700, `SOFT` 100, `WONK` 1) | All headlines and fragrance names. **Title Case**, tracking −0.015em. |
-| **Text** | Cormorant Garamond (400) | Running body copy only. Sentence case, no tracking. |
-| **Mono** | JetBrains Mono (400) | Buttons, nav, captions, prices, metadata. UPPERCASE, 2–2.5px tracking. |
+| `gold` | `#b58a4a` | Rules, borders, icons, button edges, hover fills, the pillar dots |
+| `gold-ink` | `#8a6a34` | Gold used as **text** — eyebrows, active nav, links (4.6:1) |
+| `gold-soft` | `#d5b77a` | Highlights and the pressed state |
 
-Never a display face in a button. Never mono in a paragraph. Never the serif in a control.
+On `.on-black` all three re-point to Champagne Gold, which clears 10:1 on Signature Black.
 
-The source Bugatti system uses three licensed faces unavailable publicly; its own substitution
-note states that **preserving the three-family split matters more than matching the exact
-typeface**. That split is what this system keeps. The display voice itself deliberately departs
-from Bugatti's austere sans: Fraunces is a fat serif with ball terminals and curled descenders,
-chosen against a supplied reference.
+**Never set body copy in gold.** Never fill a shape with gold and put ivory on it — a gold fill
+always takes a `signature` label.
 
-**Display is set in Title Case, not uppercase.** The ball terminals and the curled `y`/`g`
-descenders exist only in the lowercase; setting this face in caps discards the entire reason it
-was chosen. `SOFT` 100 rounds the terminals and `WONK` 1 enables the alternate curved
-descenders — both are set once on `.t-display`.
+## The type voice
 
-Fraunces is a display face. Below ~15px it gets muddy, so small labels, metadata and button
-text stay in the mono role rather than being set in the display face.
+One family — Cormorant Garamond, the high-contrast garamond the brand sheet's own logotype is
+set in — doing three jobs. The split is by weight, case and tracking, exactly as the sheet does
+it. Nothing on this site is bolder than 600.
 
-The **wordmark** is the one exception: it stays UPPERCASE at 0.32em tracking and weight 600. It
-is a mark rather than a heading and has to hold its own beside the nav at 13px.
+| Role | Cut | Use |
+|---|---|---|
+| **Display** (`.t-display`) | 600, +0.005em | Headings and fragrance names. **Title Case**. |
+| **Label** (`.t-label`) | 600, UPPERCASE, 0.22em | Nav, buttons, eyebrows, captions, prices, spec keys. |
+| **Body** (`.t-body`) | 400, 1.65 line-height | Running copy only. Sentence case, no tracking. |
+| **Wordmark** (`.t-wordmark`) | 600, UPPERCASE, 0.3em | THE PERFUME CLOSET. The only tracking past 0.22em. |
+| **Tagline** (`.t-tagline`) | 400 italic, gold-ink | "…elegance in every bottle". The house's one italic. |
+
+Garamond caps sit small: **no label below 10px, and 11px is the working size.** Body copy runs
+17–18px, a step up from where a sans would sit, because this face is delicate.
 
 ### Scale
 
-| Token | Size | Tracking | Use |
-|---|---|---|---|
-| display-xl | 72px (38px mobile) | −0.015em | Hero h1 — Fraunces, Title Case |
-| display-lg | 48px | −0.015em | Section heads |
-| display-md | 32px | −0.015em | Fragrance names, sub-heads |
-| display-sm | 24px | −0.015em | Card titles |
-| wordmark | 13px | 0.32em | THE PERFUME CLOSET — uppercase, the one wide-tracked display use |
-| title-md | 20px | −0.015em | Row titles, leads |
-| caption | 11px | 2px | Captions, metadata, notes — mono |
-| body-md | 16px | 0 | Body — serif |
-| button | 14px | 2.5px | Button labels — mono |
-| nav-link | 12px | 2px | Nav items — mono |
-
-**Display carries weight; nothing else does.** Display sits at 700 (the wordmark at 600).
-Body, mono, captions and controls stay at 400 and never bold. Emphasis inside a heading comes
-from size, never from a further weight jump.
-
-Tracking is negative on display and positive on mono. Those are the only two settings — the
-tension between a tight fat serif and a wide-tracked mono label is what carries the hierarchy.
+| Token | Size | Use |
+|---|---|---|
+| display-xl | 82px (42px mobile) | Hero h1 |
+| display-lg | 56px | Page h1 |
+| display-md | 46px | Section heads |
+| display-sm | 22–24px | Card titles, spec values |
+| wordmark | 15px header / 17px footer | The mark |
+| label | 11px (10px minimum) | Every metadata role |
+| body | 17–18px | Running copy |
+| button | 12px | Button labels |
 
 ## Layout
 
-Base unit 4px. **120px between major bands** (80px mobile) — the whitespace is part of the
-brand and must not be compressed to fit content. Max content width 1280px; photo bands bleed
-full-width with no max. Body measure caps at 68ch.
+Base unit 4px. **120px between major bands** (80px mobile) — the whitespace is the brand and
+must not be compressed to fit content. Max content width 1280px; photo bands bleed full-width.
+Body measure caps at 68ch.
+
+Bands alternate ivory → cream → black rather than running flat. A page closes on Signature
+Black, which then runs into the black footer; the closing band's photograph fades into it so
+the two read as one close rather than two stacked slabs.
 
 ## Depth
 
-No shadows. No glassmorphism. No gradients used as decoration. Depth comes from photography
-and from the narrow gap between `canvas` (#000) and `surface-card` (#141414). Dividers are 1px
-`hairline` (#262626).
+No shadows, no glassmorphism, no decorative gradients. Depth comes from photography, from the
+ivory/cream step, and from 1px `hairline` rules. The only gradients in the system are the two
+legibility scrims over the hero and closing photography.
 
 ## Shape
 
-Three shapes, and only three. No 4px, no 8px, no 12px — intermediate radii read as
-consumer-tech rather than couture.
+Three shapes, and only three. No 4px, no 8px, no 12px — intermediate radii read as consumer
+tech rather than couture.
 
 - **0px** — the default. Full-bleed bands, dividers, inputs, spec cells.
 - **pill** (`9999px`) — buttons only.
-- **`.frame-oval`** (`border-radius: 50% / 38%`) — the house frame for *contained* product and
-  editorial imagery: fragrance cards, the product gallery and its thumbnails, cart line
-  thumbnails, the contained editorial portrait. A vertical oval — the horizontal radius is the
-  full half-width so the sides bow completely, while the vertical radius stays under half-height
-  so the top and bottom keep some body instead of closing into a true ellipse.
+- **`.frame-circle`** — the house frame for *contained* imagery: fragrance cards, the product
+  gallery and its thumbnails, cart line thumbnails, the contained editorial portrait. The class
+  carries `aspect-ratio: 1/1` with it, because a 50% radius on a portrait box gives back an
+  ellipse rather than a circle. Never override that ratio.
 
-The oval never applies to full-bleed imagery — the hero, the about banner and the CTA band stay
-rectangular and edge-to-edge. An oval that touches the viewport edge stops reading as a frame.
+The circle never applies to full-bleed imagery — the hero, the about banner and the closing band
+stay rectangular and edge-to-edge. A circle that touches the viewport edge stops reading as a
+frame.
 
-Inside an oval frame, an edge-anchored indicator (an underline, a bottom bar) is clipped to a
-sliver. Use a `outline` ring, which follows the curve.
+Inside a circular frame, an edge-anchored indicator is clipped. Use an `outline` ring, which
+follows the curve.
 
 ## Components
 
-- **button-primary** — transparent fill, 1px white outline, pill, 44px tall, mono uppercase
-  2.5px tracking. The transparent pill IS the brand button. Never fill it.
-- **text-input** — transparent, no border except a 1px `hairline-strong` underline. Focus
-  thickens the underline to white.
-- **nav** — transparent, 56px, overlaid on the hero. Wordmark centred at every breakpoint.
-- **fragrance-card** — photo on black at 0px radius, name in display-md, notes line in mono
-  caption, price in mono. No card surface, no border, no shadow.
-- **text-link** — `link` (#c3d9f3), underlined. The only non-monochrome colour in the system.
+- **button/primary** — transparent, 1px `gold` edge, `ink` label, pill, 48px tall, label role.
+  Hover fills with gold and the label turns `signature`. This is the house button.
+- **button/solid** — Signature Black fill, ivory label; hover goes to a gold fill with a
+  `signature` label. Reserved for the single most consequential action in a view (Add to bag,
+  Proceed to checkout, Send).
+- **button/quiet** — `hairline-strong` edge, `body` label. For the second of two buttons.
+- **text-input** — transparent, no border except a 1px `hairline-strong` underline. Focus turns
+  the underline gold.
+- **nav** — 72px. Transparent and `.on-black` while it overlays the home hero; ivory with a
+  hairline everywhere else and once scrolled. Wordmark centred at every breakpoint, with the
+  house rule beneath it.
+- **fragrance-card** — circular photo, name in display, a gold rule, then notes and metadata in
+  the label role. No card surface, no border, no shadow. Hover draws a gold outline ring.
+- **rule-gold** (`.rule-gold`) — a 40px gold hairline. The one decorative device, lifted from
+  the brand sheet, where it sits under a label. **Once per band**, never twice.
 
 ## Do's and Don'ts
 
-**Do** anchor every page with full-bleed photography · set display in Title Case at −0.015em ·
-keep `SOFT` 100 and `WONK` 1 on display so the terminals and descenders stay characterful ·
-keep buttons transparent · hold the 120px section rhythm · theme the browser surfaces
-(selection, caret, scrollbar, focus ring) from the palette.
+**Do** anchor every page with photography · alternate ivory, cream and black bands · open a band
+with a gold eyebrow and one rule · set display in Title Case · keep gold to edges, rules and
+marks · use `gold-ink` whenever gold is text · hold the 120px section rhythm · theme the browser
+surfaces (selection, caret, scrollbar, focus ring) from the palette.
 
-**Don't** introduce any accent colour beyond `link` · set display in uppercase (it throws away
-the ball terminals and curled descenders) · wide-track a heading · bold the body, mono or
-controls · fill a primary button · compress section whitespace · round anything except buttons
-and the oval frame · blur the type trinity · add an eyebrow above a heading · use emoji or
-unicode glyphs as icons.
+**Don't** introduce any colour outside the six-swatch palette · set body copy in gold · put an
+ivory label on a gold fill · use a second gold rule in one band · wide-track a heading · bold
+anything past 600 · compress section whitespace · round anything except buttons and the circular
+frame · put a circular frame on full-bleed imagery · use emoji or unicode glyphs as icons.
+
+## The opening
+
+A Signature Black panel carrying the house lockup — wordmark, gold rule, tagline — played on
+every page load and lasting 2.45s. It is **entirely CSS**: it animates out to
+`visibility: hidden` on `forwards` and stays there, which makes it inert with no script, no
+state and no client component, and clears it even with JavaScript disabled. Reduced motion
+skips it outright.
+
+Client-side navigation between pages does not replay it — the root layout persists, so it only
+runs on a hard load or refresh.
+
+Do not add a scroll lock to it: `overflow: hidden` on `<html>` drops the scrollbar for the
+duration and the page jumps sideways by the scrollbar's width at the exact moment of reveal.
 
 ## Motion
 
-One authored moment: photography and headlines rise into place on scroll with an exponential
-ease-out from an already-visible default. Never an identical entrance on every section, and
-never motion that blocks reading. All motion respects `prefers-reduced-motion`.
+One authored moment: photography and headlines rise and un-blur into place on scroll with an
+exponential ease-out, from an already-visible default so a failed observer never hides content.
+Never an identical entrance on every section, and never motion that blocks reading. All motion
+respects `prefers-reduced-motion`.

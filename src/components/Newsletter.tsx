@@ -38,8 +38,9 @@ export function Newsletter() {
 
   return (
     <div className="max-w-sm">
-      <h2 className="t-display text-[20px]">Correspondence</h2>
-      <p className="t-body mt-4 text-[14px] leading-relaxed text-muted">
+      <h2 className="t-display text-[24px]">Correspondence</h2>
+      <span aria-hidden className="rule-gold mt-4" />
+      <p className="t-body mt-5 text-[15px] leading-relaxed text-muted">
         A new composition arrives roughly once a year. This list hears about it before
         anyone else, and hears from us rarely otherwise.
       </p>
@@ -48,7 +49,7 @@ export function Newsletter() {
         <label htmlFor="newsletter-email" className="sr-only">
           Email address
         </label>
-        <div className="flex items-center gap-3 border-b border-hairline-strong transition-colors duration-300 focus-within:border-ink">
+        <div className="flex items-center gap-3 border-b border-hairline-strong transition-colors duration-300 focus-within:border-gold">
           <input
             id="newsletter-email"
             type="email"
@@ -64,13 +65,13 @@ export function Newsletter() {
                 setMessage("");
               }
             }}
-            className="t-body h-11 min-w-0 flex-1 bg-transparent text-[15px] text-ink outline-none placeholder:text-muted-soft"
+            className="t-body h-12 min-w-0 flex-1 bg-transparent text-[16px] text-ink outline-none placeholder:text-muted-soft"
           />
           <button
             type="submit"
             disabled={status === "submitting"}
             aria-label="Subscribe"
-            className="flex h-11 w-11 shrink-0 items-center justify-center text-ink transition-opacity duration-300 hover:opacity-60 disabled:opacity-40"
+            className="flex h-12 w-11 shrink-0 items-center justify-center text-gold transition-colors duration-300 hover:text-ink disabled:opacity-40"
           >
             {status === "submitting" ? (
               <SpinnerIcon className="h-4 w-4 animate-spin" />

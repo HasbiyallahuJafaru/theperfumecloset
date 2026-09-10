@@ -53,11 +53,11 @@ export default async function FragrancePage({ params }: PageProps<"/fragrance/[s
   ];
 
   return (
-    <div className="mx-auto max-w-[1280px] px-5 pb-24 pt-28 sm:px-8 sm:pb-[120px] sm:pt-36">
+    <div className="mx-auto max-w-[1280px] px-5 pb-24 pt-32 sm:px-8 sm:pb-[120px] sm:pt-40">
       <nav aria-label="Breadcrumb" className="mb-10">
         <Link
           href="/collection"
-          className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-soft transition-colors duration-300 hover:text-ink"
+          className="t-label text-[11px] text-gold-ink transition-colors duration-300 hover:text-ink"
         >
           The Collection
         </Link>
@@ -67,42 +67,41 @@ export default async function FragrancePage({ params }: PageProps<"/fragrance/[s
         <ProductGallery images={fragrance.images} name={fragrance.name} />
 
         <div className="lg:pt-4">
-          <h1 className="t-display text-[32px] leading-[1.12] sm:text-[42px]">
+          <h1 className="t-display text-[38px] leading-[1.08] sm:text-[52px]">
             {fragrance.name}
           </h1>
-          <p className="t-body mt-4 text-[17px] italic leading-relaxed text-muted">
+          <p className="t-tagline mt-5 text-[19px] leading-relaxed">
             {fragrance.tagline}
           </p>
 
-          <div className="mt-8 flex items-baseline gap-4 border-y border-hairline py-5">
-            <span className="tabular font-mono text-[16px] tracking-[0.1em] text-ink">
+          <div className="mt-9 flex items-baseline gap-4 border-y border-gold/40 py-5">
+            <span className="tabular t-label text-[17px] text-ink">
               {formatPrice(fragrance.price)}
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-soft">
+            <span className="t-label text-[11px] text-muted-soft">
               {fragrance.sizeMl}ml · {fragrance.concentration}
             </span>
           </div>
 
-          <p className="t-body mt-8 text-[16px] leading-[1.75] text-body-strong">
+          <p className="t-body mt-9 text-[17px] leading-[1.75] text-body-strong">
             {fragrance.description}
           </p>
 
           <AddToCart slug={fragrance.slug} name={fragrance.name} />
 
           <div className="mt-14 border-t border-hairline pt-10">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-soft">
-              Composition
-            </h2>
+            <h2 className="t-label text-[11px] text-gold-ink">Composition</h2>
+            <span aria-hidden className="rule-gold mt-4" />
             <dl className="mt-6 space-y-5">
               {pyramid.map((tier) => (
                 <div
                   key={tier.label}
                   className="grid grid-cols-[70px_1fr] items-baseline gap-4 border-b border-hairline pb-5 last:border-b-0"
                 >
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+                  <dt className="t-label text-[11px] text-muted">
                     {tier.label}
                   </dt>
-                  <dd className="t-body text-[15px] leading-relaxed text-body-strong">
+                  <dd className="t-body text-[16px] leading-relaxed text-body-strong">
                     {tier.notes.join(", ")}
                   </dd>
                 </div>
@@ -111,19 +110,18 @@ export default async function FragrancePage({ params }: PageProps<"/fragrance/[s
           </div>
 
           <div className="mt-12 border-t border-hairline pt-10">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-soft">
-              Good to know
-            </h2>
+            <h2 className="t-label text-[11px] text-gold-ink">Good to know</h2>
+            <span aria-hidden className="rule-gold mt-4" />
             <dl className="mt-6 grid grid-cols-1 gap-x-10 sm:grid-cols-2">
               {details.map((d) => (
                 <div
                   key={d.label}
                   className="flex items-baseline justify-between gap-4 border-b border-hairline py-3.5"
                 >
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+                  <dt className="t-label text-[11px] text-muted">
                     {d.label}
                   </dt>
-                  <dd className="t-body text-right text-[15px] text-body-strong">{d.value}</dd>
+                  <dd className="t-body text-right text-[16px] text-body-strong">{d.value}</dd>
                 </div>
               ))}
             </dl>
@@ -132,9 +130,9 @@ export default async function FragrancePage({ params }: PageProps<"/fragrance/[s
       </div>
 
       <section className="mt-24 border-t border-hairline pt-16 sm:mt-[120px]">
-        <h2 className="t-display text-[24px] sm:text-[30px]">
-          Also from the house
-        </h2>
+        <span className="t-label text-[11px] text-gold-ink">The Collection</span>
+        <span aria-hidden className="rule-gold mt-4" />
+        <h2 className="t-display mt-6 text-[28px] sm:text-[36px]">Also from the house</h2>
         <div className="mt-12 grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((f, i) => (
             <Reveal key={f.slug} delay={i * 110}>

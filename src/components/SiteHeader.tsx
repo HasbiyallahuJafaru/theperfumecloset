@@ -39,15 +39,18 @@ export function SiteHeader() {
     return () => document.removeEventListener("keydown", onKey);
   }, [menuOpen]);
 
+  // Only the home hero puts dark footage behind the bar. Everywhere else the
+  // page is ivory from the first pixel, so the bar reads dark-on-light at once.
+  const overHero = pathname === "/" && !scrolled && !menuOpen;
+  const settled = !overHero;
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-700 ${
-        scrolled || menuOpen
-          ? "bg-canvas/95 backdrop-blur-sm border-b border-hairline"
-          : "border-b border-transparent"
-      }`}
+        overHero ? "on-black border-b border-transparent" : ""
+      } ${settled ? "border-b border-hairline bg-canvas/95 backdrop-blur-sm" : ""}`}
     >
-      <div className="mx-auto flex h-14 max-w-[1280px] items-center justify-between px-5 sm:px-8">
+      <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5 sm:px-8">
         {/* Left slot: hamburger below xl; otherwise it just balances the wordmark. */}
         <div className="flex flex-1 items-center">
           <button
@@ -55,7 +58,7 @@ export function SiteHeader() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="-ml-2 flex h-11 w-11 items-center justify-center text-ink xl:hidden"
+            className="-ml-2 flex h-11 w-11 items-center justify-center text-ink transition-colors duration-300 hover:text-gold-ink xl:hidden"
           >
             {menuOpen ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
           </button>
@@ -63,13 +66,16 @@ export function SiteHeader() {
 
         <Link
           href="/"
-          className="t-wordmark absolute left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] sm:text-[12px] md:text-[13px]"
+          className="absolute left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5"
         >
-          The Perfume Closet
+          <span className="t-wordmark whitespace-nowrap text-[11px] sm:text-[13px] md:text-[15px]">
+            The Perfume Closet
+          </span>
+          <span aria-hidden className="rule-gold w-8 sm:w-12" />
         </Link>
 
-        <div className="flex flex-1 items-center justify-end gap-7">
-          <nav className="hidden items-center gap-7 xl:flex">
+        <div className="flex flex-1 items-center justify-end gap-8">
+          <nav className="hidden items-center gap-8 xl:flex">
             {links.map((link) => {
               const active = isActive(pathname, link.href);
               return (
@@ -77,8 +83,10 @@ export function SiteHeader() {
                   key={link.href}
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className={`font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-300 ${
-                    active ? "text-ink" : "text-muted hover:text-ink"
+                  className={`t-label text-[11px] transition-colors duration-300 ${
+                    active
+                      ? "text-gold-ink"
+                      : "text-body hover:text-gold-ink"
                   }`}
                 >
                   {link.label}
@@ -90,11 +98,11 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={open}
-            className="-mr-2 flex h-11 items-center gap-2 px-2 text-ink transition-opacity duration-300 hover:opacity-70"
+            className="-mr-2 flex h-11 items-center gap-2.5 px-2 text-ink transition-colors duration-300 hover:text-gold-ink"
             aria-label={`Open bag${hydrated && count > 0 ? `, ${count} item${count === 1 ? "" : "s"}` : ", empty"}`}
           >
-            <BagIcon className="h-[18px] w-[18px]" />
-            <span className="tabular font-mono text-[11px] uppercase tracking-[0.2em]">
+            <BagIcon className="h-[19px] w-[19px]" />
+            <span className="tabular t-label text-[11px]">
               {hydrated && count > 0 ? String(count).padStart(2, "0") : "00"}
             </span>
           </button>
@@ -113,8 +121,8 @@ export function SiteHeader() {
               href={link.href}
               onClick={() => setMenuOpen(false)}
               aria-current={isActive(pathname, link.href) ? "page" : undefined}
-              className={`border-b border-hairline py-5 font-mono text-[12px] uppercase tracking-[0.2em] last:border-b-0 ${
-                isActive(pathname, link.href) ? "text-ink" : "text-body"
+              className={`t-label border-b border-hairline py-5 text-[12px] last:border-b-0 ${
+                isActive(pathname, link.href) ? "text-gold-ink" : "text-body"
               }`}
             >
               {link.label}
@@ -125,4 +133,3 @@ export function SiteHeader() {
     </header>
   );
 }
-

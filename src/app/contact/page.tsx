@@ -29,11 +29,13 @@ const notes = [
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-[1280px] px-5 pb-24 pt-32 sm:px-8 sm:pb-[120px] sm:pt-44">
-      <h1 className="t-display max-w-[16ch] text-[32px] leading-[1.12] sm:text-[48px]">
+    <div className="mx-auto max-w-[1280px] px-5 pb-24 pt-36 sm:px-8 sm:pb-[120px] sm:pt-48">
+      <span className="t-label text-[11px] text-gold-ink">Client Care</span>
+      <span aria-hidden className="rule-gold mt-4" />
+      <h1 className="t-display mt-6 max-w-[16ch] text-[38px] leading-[1.08] sm:text-[56px]">
         Write to us
       </h1>
-      <p className="t-body mt-8 text-[16px] leading-[1.75] text-muted sm:text-[17px]">
+      <p className="t-body mt-8 text-[17px] leading-[1.75] text-muted sm:text-[18px]">
         There is no call centre. Every note is read and answered by someone at the house,
         usually within two working days.
       </p>
@@ -43,15 +45,14 @@ export default function ContactPage() {
 
         <aside className="space-y-14">
           <section id="stockists" className="scroll-mt-24">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-soft">
-              Stockists
-            </h2>
+            <h2 className="t-label text-[11px] text-gold-ink">Stockists</h2>
+            <span aria-hidden className="rule-gold mt-4" />
             <ul className="mt-6">
               {stockists.map((s) => (
                 <li key={s.name} className="border-b border-hairline py-5 last:border-b-0">
-                  <p className="t-display text-[15px]">{s.name}</p>
-                  <p className="t-body mt-1.5 text-[14px] text-muted">{s.detail}</p>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-soft">
+                  <p className="t-display text-[18px]">{s.name}</p>
+                  <p className="t-body mt-1.5 text-[15px] text-muted">{s.detail}</p>
+                  <p className="mt-1 t-label text-[11px] text-muted-soft">
                     {s.city}
                   </p>
                 </li>
@@ -61,10 +62,9 @@ export default function ContactPage() {
 
           {notes.map((note) => (
             <section key={note.id} id={note.id} className="scroll-mt-24">
-              <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-soft">
-                {note.heading}
-              </h2>
-              <p className="t-body mt-4 text-[15px] leading-[1.75] text-body">{note.body}</p>
+              <h2 className="t-label text-[11px] text-gold-ink">{note.heading}</h2>
+              <span aria-hidden className="rule-gold mt-4" />
+              <p className="t-body mt-5 text-[16px] leading-[1.75] text-body">{note.body}</p>
             </section>
           ))}
         </aside>

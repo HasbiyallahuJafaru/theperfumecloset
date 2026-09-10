@@ -57,8 +57,8 @@ export function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div className="border border-hairline p-10 text-center">
-        <p className="t-display text-[20px]">Thank you</p>
+      <div className="border border-gold/40 bg-surface-soft p-12 text-center">
+        <p className="t-display text-[26px]">Thank you</p>
         <p className="t-body mx-auto mt-4 max-w-[44ch] text-[15px] leading-relaxed text-muted">
           Your note has reached us. We answer everything ourselves, usually within two
           working days.
@@ -69,7 +69,7 @@ export function ContactForm() {
             setValues({ name: "", email: "", subject: subjects[0], message: "" });
             setStatus("idle");
           }}
-          className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-ink underline underline-offset-[6px] transition-opacity duration-300 hover:opacity-60"
+          className="t-label mt-8 text-[11px] text-gold-ink underline underline-offset-[6px] transition-colors duration-300 hover:text-ink"
         >
           Write another
         </button>
@@ -99,7 +99,7 @@ export function ContactForm() {
       />
 
       <fieldset>
-        <legend className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-soft">
+        <legend className="t-label text-[11px] text-muted">
           Regarding
         </legend>
         <div className="mt-4 flex flex-wrap gap-x-7 gap-y-3">
@@ -111,11 +111,11 @@ export function ContactForm() {
                 value={s}
                 checked={values.subject === s}
                 onChange={() => set("subject", s)}
-                className="h-3.5 w-3.5 appearance-none rounded-full border border-hairline-strong transition-colors duration-200 checked:border-ink checked:bg-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2"
+                className="h-3.5 w-3.5 appearance-none rounded-full border border-hairline-strong transition-colors duration-200 checked:border-gold checked:bg-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2"
               />
               <span
-                className={`font-mono text-[11px] uppercase tracking-[0.16em] transition-colors duration-200 ${
-                  values.subject === s ? "text-ink" : "text-muted"
+                className={`t-label text-[11px] transition-colors duration-200 ${
+                  values.subject === s ? "text-gold-ink" : "text-muted"
                 }`}
               >
                 {s}
@@ -128,7 +128,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="contact-message"
-          className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-soft"
+          className="t-label text-[11px] text-muted"
         >
           Your note
         </label>
@@ -139,7 +139,7 @@ export function ContactForm() {
           onChange={(e) => set("message", e.target.value)}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "contact-message-error" : undefined}
-          className={`t-body mt-3 block w-full max-w-none resize-y border-b bg-transparent py-3 text-[16px] text-ink outline-none transition-colors duration-300 placeholder:text-muted-soft focus:border-ink ${
+          className={`t-body mt-3 block w-full max-w-none resize-y border-b bg-transparent py-3 text-[17px] text-ink outline-none transition-colors duration-300 placeholder:text-muted-soft focus:border-gold ${
             errors.message ? "border-warning" : "border-hairline-strong"
           }`}
         />
@@ -150,7 +150,7 @@ export function ContactForm() {
         ) : null}
       </div>
 
-      <Button type="submit" disabled={status === "sending"}>
+      <Button type="submit" tone="solid" disabled={status === "sending"}>
         {status === "sending" ? (
           <>
             <SpinnerIcon className="h-4 w-4 animate-spin" />
@@ -185,7 +185,7 @@ function Field({
     <div>
       <label
         htmlFor={id}
-        className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-soft"
+        className="t-label text-[11px] text-muted"
       >
         {label}
       </label>
@@ -197,7 +197,7 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        className={`t-body mt-3 block h-11 w-full max-w-none border-b bg-transparent text-[16px] text-ink outline-none transition-colors duration-300 placeholder:text-muted-soft focus:border-ink ${
+        className={`t-body mt-3 block h-12 w-full max-w-none border-b bg-transparent text-[17px] text-ink outline-none transition-colors duration-300 placeholder:text-muted-soft focus:border-gold ${
           error ? "border-warning" : "border-hairline-strong"
         }`}
       />

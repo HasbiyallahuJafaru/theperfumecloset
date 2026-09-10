@@ -2,42 +2,83 @@
 
 /* ---------------------------------------------------------------------------
    The Perfume Closet — design tokens. See DESIGN.md.
-   Monochrome only. The single non-monochrome token is --color-link.
+
+   Two grounds, one system. The page is Closet Ivory; Signature Black bands are
+   scoped with `.on-black`, which re-points the same semantic tokens rather than
+   asking every component to know which ground it is standing on.
 --------------------------------------------------------------------------- */
 
 @theme {
-  --color-canvas: #000000;
-  --color-surface-soft: #0d0d0d;
-  --color-surface-card: #141414;
-  --color-surface-elevated: #1f1f1f;
+  /* Brand literals. These never flip — they are the palette itself. */
+  --color-ivory: #f8f5ef;
+  --color-cream: #efe8dc;
+  --color-signature: #0a0a0a;
+  --color-charcoal: #292725;
 
-  --color-ink: #ffffff;
-  --color-body: #cccccc;
-  --color-body-strong: #e6e6e6;
-  --color-muted: #999999;
-  --color-muted-soft: #666666;
+  /* Semantic tokens, light ground. `.on-black` overrides every one of these. */
+  --color-canvas: #f8f5ef;
+  --color-surface-soft: #efe8dc;
+  --color-surface-card: #efe8dc;
+  --color-surface-elevated: #e6ddcc;
 
-  --color-hairline: #262626;
-  --color-hairline-strong: #3a3a3a;
+  --color-ink: #0a0a0a;
+  --color-body: #292725;
+  --color-body-strong: #171614;
+  --color-muted: #57514a;
+  --color-muted-soft: #6f685f;
 
-  --color-link: #c3d9f3;
-  --color-warning: #d4a017;
-  --color-success: #5fa657;
+  --color-hairline: #e2dacb;
+  --color-hairline-strong: #c9bea8;
 
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  /* Closet Gold carries lines, icons and edges. It fails contrast as body text
+     on ivory, so gold-set *text* uses --color-gold-ink, a deepened cast of it. */
+  --color-gold: #b58a4a;
+  --color-gold-soft: #d5b77a;
+  --color-gold-ink: #8a6a34;
+
+  --color-warning: #8f3a2e;
+  --color-success: #4f6b45;
+
+  --font-display: var(--font-cormorant-display), Garamond, "Times New Roman", serif;
   --font-text: var(--font-cormorant), Garamond, "Times New Roman", serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", "Cascadia Mono", monospace;
 
   --spacing-section: 120px;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Signature Black bands: hero, closing calls, the footer. Champagne Gold takes
+   over from Closet Gold here — the darker gold goes muddy against black. */
+.on-black {
+  --color-canvas: #0a0a0a;
+  --color-surface-soft: #131211;
+  --color-surface-card: #1a1815;
+  --color-surface-elevated: #24211d;
+
+  --color-ink: #f8f5ef;
+  --color-body: #d6cfc2;
+  --color-body-strong: #efe8dc;
+  --color-muted: #a9a093;
+  --color-muted-soft: #8b8275;
+
+  --color-hairline: #2a2723;
+  --color-hairline-strong: #443e35;
+
+  --color-gold: #d5b77a;
+  --color-gold-soft: #b58a4a;
+  --color-gold-ink: #d5b77a;
+
+  --color-warning: #d99f8f;
+  --color-success: #9dbb92;
+
+  color-scheme: dark;
+}
+
 /* --- Base ---------------------------------------------------------------- */
 
 html {
-  background-color: var(--color-canvas);
-  color-scheme: dark;
+  background-color: var(--color-ivory);
+  color-scheme: light;
   scroll-behavior: smooth;
 }
 
@@ -66,13 +107,13 @@ body {
 ------------------------------------------------------------------------- */
 
 ::selection {
-  background-color: var(--color-ink);
-  color: var(--color-canvas);
+  background-color: var(--color-gold-soft);
+  color: var(--color-signature);
 }
 
 :root {
-  caret-color: var(--color-ink);
-  accent-color: var(--color-ink);
+  caret-color: var(--color-gold-ink);
+  accent-color: var(--color-gold);
 }
 
 ::-webkit-scrollbar {
@@ -80,22 +121,22 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-canvas);
+  background: var(--color-ivory);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-hairline-strong);
-  border: 3px solid var(--color-canvas);
+  border: 3px solid var(--color-ivory);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted-soft);
+  background: var(--color-gold);
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-hairline-strong) var(--color-canvas);
+  scrollbar-color: var(--color-hairline-strong) var(--color-ivory);
 }
 
 :focus-visible {
-  outline: 1px solid var(--color-ink);
+  outline: 1px solid var(--color-gold);
   outline-offset: 3px;
 }
 
@@ -104,85 +145,194 @@ a {
   text-decoration-thickness: 1px;
 }
 
-/* Prices, sizes and note counts must not shift width as they change. */
-.tabular {
-  font-variant-numeric: tabular-nums;
-}
-
-/* The house frame: a vertical oval. Horizontal radius is the full half-width so
-   the sides bow fully; the vertical radius stays under half-height so the top
-   and bottom keep some body rather than closing into a true ellipse. */
-.frame-oval {
-  border-radius: 50% / 38%;
-}
-
-/* --- Type roles ----------------------------------------------------------
-   Display is a fat serif set in title case: the ball terminals and curled
-   descenders only exist in the lowercase, so uppercase would discard the
-   face's whole character. SOFT rounds the terminals, WONK enables the
-   alternate curved descenders.
-------------------------------------------------------------------------- */
-
-.t-display {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-variation-settings:
-    "SOFT" 100,
-    "WONK" 1;
-  letter-spacing: -0.015em;
-  color: var(--color-ink);
-}
-
-.t-mono {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.t-body {
-  font-family: var(--font-text);
-  font-weight: 400;
-  line-height: 1.6;
-  max-width: 68ch;
-}
-
-/* The wordmark stays uppercase and wide-tracked — it is a mark, not a heading,
-   and it needs to hold its own beside the nav at 13px. */
-.t-wordmark {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-variation-settings: "SOFT" 100;
-  text-transform: uppercase;
-  letter-spacing: 0.32em;
-  font-size: 13px;
-  line-height: 1;
-  color: var(--color-ink);
-}
-
-/* --- The one authored motion moment --------------------------------------
-   Content rises into place from an already-visible default, so a failed
-   observer or disabled JS never hides content.
-------------------------------------------------------------------------- */
-
-.rise {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .rise {
-    opacity: 0;
-    transform: translateY(28px);
-    filter: blur(6px);
-    transition:
-      opacity 1100ms var(--ease-out-expo),
-      transform 1100ms var(--ease-out-expo),
-      filter 1100ms var(--ease-out-expo);
+@layer components {
+  /* Prices, sizes and note counts must not shift width as they change. */
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
   }
-  .rise[data-visible="true"] {
+
+  /* The house frame: a circle. It only reads as one on a square box, so every
+     element carrying it is set 1:1 — a 50% radius on a portrait box would give
+     back an ellipse. Contained imagery only; full-bleed bands stay square-cut. */
+  .frame-circle {
+    border-radius: 9999px;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* --- Type roles ----------------------------------------------------------
+     One family, three roles, separated by weight, case and tracking — the split
+     the brand sheet itself uses. Display and labels are the 600; running copy is
+     the 400. Nothing on this site is bolder than 600.
+  ------------------------------------------------------------------------- */
+
+  .t-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: var(--color-ink);
+  }
+
+  .t-body {
+    font-family: var(--font-text);
+    font-weight: 400;
+    line-height: 1.65;
+    max-width: 68ch;
+  }
+
+  /* The label role: everything the eye reads as metadata rather than prose —
+     nav, buttons, captions, prices, spec keys. Caps, wide, never below 11px. */
+  .t-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    line-height: 1;
+  }
+
+  /* The wordmark is a mark, not a heading: wider than any label, and the only
+     place tracking runs past 0.22em. */
+  .t-wordmark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    line-height: 1.1;
+    color: var(--color-ink);
+  }
+
+  /* "…elegance in every bottle" and its relatives. The house's one italic. */
+  .t-tagline {
+    font-family: var(--font-text);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--color-gold-ink);
+  }
+
+  /* The one decorative device, lifted from the brand sheet: a short gold rule
+     under a label. Used to open a band, never more than once per band. */
+  .rule-gold {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background-color: var(--color-gold);
+  }
+
+  /* --- The one authored motion moment --------------------------------------
+     Content rises into place from an already-visible default, so a failed
+     observer or disabled JS never hides content.
+  ------------------------------------------------------------------------- */
+
+  .rise {
     opacity: 1;
     transform: none;
-    filter: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .rise {
+      opacity: 0;
+      transform: translateY(28px);
+      filter: blur(6px);
+      transition:
+        opacity 1100ms var(--ease-out-expo),
+        transform 1100ms var(--ease-out-expo),
+        filter 1100ms var(--ease-out-expo);
+    }
+    .rise[data-visible="true"] {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+/* --- The opening -----------------------------------------------------------
+   A Signature Black panel carrying the house lockup, played on every page load.
+   It is entirely CSS: it ends on `forwards` at visibility:hidden and stays
+   there, which makes it inert without any script, state or component — so it
+   clears itself even if JavaScript never runs.
+------------------------------------------------------------------------- */
+
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 0 24px;
+    text-align: center;
+    background-color: var(--color-canvas);
+    animation: intro-out 650ms var(--ease-out-expo) 1800ms forwards;
+  }
+
+  /* The wordmark's tracking leaves a trailing space after the last letter, so a
+     centred box sits half a track to the left. The negative margin takes it
+     back, and rides the same curve as the tracking. */
+  .intro-word {
+    margin-right: -0.3em;
+    animation: intro-word-in 1000ms var(--ease-out-expo) 100ms both;
+  }
+
+  .intro-rule {
+    display: block;
+    width: 72px;
+    height: 1px;
+    margin: 26px auto 0;
+    background-color: var(--color-gold);
+    animation: intro-rule-in 700ms var(--ease-out-expo) 650ms both;
+  }
+
+  .intro-tagline {
+    margin-top: 22px;
+    animation: intro-fade-up 800ms var(--ease-out-expo) 950ms both;
+  }
+
+  @keyframes intro-out {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @keyframes intro-word-in {
+    from {
+      opacity: 0;
+      letter-spacing: 0.62em;
+      margin-right: -0.62em;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      letter-spacing: 0.3em;
+      margin-right: -0.3em;
+      transform: none;
+    }
+  }
+
+  @keyframes intro-rule-in {
+    from {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    to {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes intro-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+}

@@ -25,7 +25,7 @@ export function CollectionGrid() {
 
   return (
     <>
-      <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 border-y border-hairline py-5">
+      <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-4 border-y border-hairline py-5">
         {options.map((option) => {
           const active = filter === option;
           const count =
@@ -39,12 +39,12 @@ export function CollectionGrid() {
               type="button"
               onClick={() => setFilter(option)}
               aria-pressed={active}
-              className={`font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${
-                active ? "text-ink" : "text-muted-soft hover:text-body"
+              className={`t-label text-[11px] transition-colors duration-300 ${
+                active ? "text-gold-ink" : "text-muted hover:text-ink"
               }`}
             >
               {option}
-              <span className="tabular ml-2 text-[9px] text-muted-soft">
+              <span className="tabular ml-2 text-[10px] text-muted-soft">
                 {String(count).padStart(2, "0")}
               </span>
             </button>
@@ -58,14 +58,14 @@ export function CollectionGrid() {
 
       {shown.length === 0 ? (
         <div className="py-28 text-center">
-          <p className="t-display text-[18px]">Nothing in this family yet</p>
+          <p className="t-display text-[22px]">Nothing in this family yet</p>
           <p className="t-body mx-auto mt-4 max-w-[44ch] text-[15px] leading-relaxed text-muted">
             The house releases one composition a year. Ask to be told when the next arrives.
           </p>
           <button
             type="button"
             onClick={() => setFilter("All")}
-            className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-ink underline underline-offset-[6px] transition-opacity duration-300 hover:opacity-60"
+            className="t-label mt-8 text-[11px] text-gold-ink underline underline-offset-[6px] transition-colors duration-300 hover:text-ink"
           >
             Show all six
           </button>

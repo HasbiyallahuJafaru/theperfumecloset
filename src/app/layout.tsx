@@ -8,14 +8,15 @@ import { CartDrawer } from "@/components/CartDrawer";
 
 // Self-hosted: no build-time or runtime dependency on a font CDN.
 
-// Variable: weight 100–900 plus SOFT and WONK axes, set in globals.css.
-const fraunces = localFont({
-  src: "../fonts/Fraunces.woff2",
-  weight: "100 900",
+// One family, two cuts. The 600 carries every heading, label and the wordmark;
+// the 400 carries running copy and the house italic. See DESIGN.md.
+const cormorantDisplay = localFont({
+  src: "../fonts/CormorantGaramond-600.woff2",
+  weight: "500 700",
   style: "normal",
   display: "swap",
-  variable: "--font-fraunces",
-  fallback: ["Georgia", "Times New Roman", "serif"],
+  variable: "--font-cormorant-display",
+  fallback: ["Garamond", "Times New Roman", "serif"],
 });
 
 const cormorant = localFont({
@@ -26,15 +27,6 @@ const cormorant = localFont({
   display: "swap",
   variable: "--font-cormorant",
   fallback: ["Garamond", "Times New Roman", "serif"],
-});
-
-const jetbrains = localFont({
-  src: "../fonts/JetBrainsMono-400.woff2",
-  weight: "400",
-  style: "normal",
-  display: "swap",
-  variable: "--font-jetbrains",
-  fallback: ["ui-monospace", "SF Mono", "Cascadia Mono", "monospace"],
 });
 
 export const metadata: Metadata = {
@@ -57,7 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${cormorant.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${cormorantDisplay.variable} ${cormorant.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-canvas text-body">
         <CartProvider>
@@ -68,6 +60,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SiteFooter />
           <CartDrawer />
         </CartProvider>
+
+        {/* The opening. Pure CSS: it animates out to visibility:hidden and stays
+            there, so it needs no client component, no state and no script, and
+            it clears itself even if JavaScript never runs. See globals.css. */}
+        <div className="intro on-black" aria-hidden>
+          <div>
+            <p className="t-wordmark intro-word text-[13px] sm:text-[19px]">
+              The Perfume Closet
+            </p>
+            <span className="intro-rule" />
+            <p className="t-tagline intro-tagline text-[15px] text-gold sm:text-[17px]">
+              …elegance in every bottle
+            </p>
+          </div>
+        </div>
       </body>
     </html>
   );

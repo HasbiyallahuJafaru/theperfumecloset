@@ -8,7 +8,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
 
   return (
     <div>
-      <div className="frame-oval relative aspect-[4/5] overflow-hidden bg-surface-card">
+      <div className="frame-circle relative overflow-hidden bg-surface-card">
         {images.map((src, i) => (
           <Image
             key={src}
@@ -33,13 +33,13 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
               onClick={() => setActive(i)}
               aria-label={`View image ${i + 1} of ${images.length}`}
               aria-pressed={i === active}
-              className={`frame-oval relative h-24 w-[76px] overflow-hidden bg-surface-card outline-offset-4 transition-opacity duration-300 ${
+              className={`frame-circle relative w-[84px] overflow-hidden bg-surface-card outline-offset-4 transition-opacity duration-300 ${
                 i === active
-                  ? "opacity-100 outline outline-1 outline-ink"
+                  ? "opacity-100 outline outline-1 outline-gold"
                   : "opacity-45 hover:opacity-80"
               }`}
             >
-              <Image src={src} alt="" fill sizes="76px" className="object-cover" />
+              <Image src={src} alt="" fill sizes="84px" className="object-cover" />
             </button>
           ))}
         </div>

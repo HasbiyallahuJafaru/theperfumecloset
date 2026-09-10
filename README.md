@@ -101,7 +101,8 @@ Everything below is placeholder and is **not** real business truth:
   (cottonbro studio) — free to use, no attribution required.
 - Placeholder photography: [Unsplash](https://unsplash.com) — free to use; not licensed as
   your own product imagery.
-- Design language adapted from the Bugatti `DESIGN.md` in
-  [voltagent/awesome-design-md](https://github.com/voltagent/awesome-design-md).
-- Typefaces: Fraunces (display), Cormorant Garamond (body), JetBrains Mono (labels) —
-  all SIL Open Font License, self-hosted in `src/fonts/`.
+- Design language derived from the house brand sheet (`brand/brand-colours.jpeg`):
+  Closet Ivory, Soft Cream, Signature Black, Elegant Charcoal, Closet Gold, Champagne Gold.
+  See `DESIGN.md`.
+- Typeface: Cormorant Garamond — the 600 for display, labels and the wordmark, the 400 and its
+  italic for running copy. SIL Open Font License, self-hosted in `src/fonts/`.

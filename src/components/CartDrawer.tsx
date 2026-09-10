@@ -70,7 +70,7 @@ export function CartDrawer() {
         tabIndex={isOpen ? 0 : -1}
         onClick={handleClose}
         aria-label="Close bag"
-        className={`absolute inset-0 h-full w-full cursor-default bg-canvas/80 backdrop-blur-[2px] transition-opacity duration-700 ${
+        className={`absolute inset-0 h-full w-full cursor-default bg-signature/50 backdrop-blur-[2px] transition-opacity duration-700 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
       />
@@ -84,8 +84,8 @@ export function CartDrawer() {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex h-14 shrink-0 items-center justify-between border-b border-hairline px-6">
-          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+        <div className="flex h-[72px] shrink-0 items-center justify-between border-b border-hairline px-6">
+          <span className="t-label text-[11px] text-muted">
             Your bag
             {hydrated && count > 0 ? (
               <span className="tabular text-ink"> · {String(count).padStart(2, "0")}</span>
@@ -95,7 +95,7 @@ export function CartDrawer() {
             type="button"
             onClick={handleClose}
             aria-label="Close bag"
-            className="-mr-2 flex h-11 w-11 items-center justify-center text-ink transition-opacity duration-300 hover:opacity-60"
+            className="-mr-2 flex h-11 w-11 items-center justify-center text-ink transition-colors duration-300 hover:text-gold-ink"
           >
             <CloseIcon className="h-5 w-5" />
           </button>
@@ -118,13 +118,13 @@ export function CartDrawer() {
                   <Link
                     href={`/fragrance/${fragrance.slug}`}
                     onClick={handleClose}
-                    className="frame-oval relative h-[104px] w-[78px] shrink-0 overflow-hidden bg-surface-card"
+                    className="frame-circle relative w-[84px] shrink-0 overflow-hidden bg-surface-card"
                   >
                     <Image
                       src={fragrance.images[0]}
                       alt=""
                       fill
-                      sizes="78px"
+                      sizes="84px"
                       className="object-cover"
                     />
                   </Link>
@@ -137,19 +137,19 @@ export function CartDrawer() {
                     >
                       {fragrance.name}
                     </Link>
-                    <span className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+                    <span className="mt-1 t-label text-[11px] text-muted">
                       {fragrance.concentration} · {fragrance.sizeMl}ml
                     </span>
 
                     <div className="mt-auto flex items-end justify-between pt-4">
-                      <div className="flex items-center border border-hairline">
+                      <div className="flex items-center border border-hairline-strong">
                         <QtyButton
                           label={`Decrease quantity of ${fragrance.name}`}
                           onClick={() => setQuantity(fragrance.slug, quantity - 1)}
                         >
                           <MinusIcon className="h-3.5 w-3.5" />
                         </QtyButton>
-                        <span className="tabular w-8 text-center font-mono text-[12px] text-ink">
+                        <span className="tabular w-8 text-center t-label text-[12px] text-ink">
                           {quantity}
                         </span>
                         <QtyButton
@@ -162,13 +162,13 @@ export function CartDrawer() {
                       </div>
 
                       <div className="flex flex-col items-end gap-1">
-                        <span className="tabular font-mono text-[12px] tracking-[0.1em] text-ink">
+                        <span className="tabular t-label text-[12px] text-ink">
                           {formatPrice(lineTotal)}
                         </span>
                         <button
                           type="button"
                           onClick={() => remove(fragrance.slug)}
-                          className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-soft underline underline-offset-4 transition-colors duration-300 hover:text-ink"
+                          className="t-label text-[11px] text-muted-soft underline underline-offset-4 transition-colors duration-300 hover:text-warning"
                         >
                           Remove
                         </button>
@@ -181,10 +181,10 @@ export function CartDrawer() {
 
             <div className="shrink-0 border-t border-hairline px-6 py-6">
               <div className="flex items-baseline justify-between">
-                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+                <span className="t-label text-[11px] text-muted">
                   Subtotal
                 </span>
-                <span className="tabular font-mono text-[15px] tracking-[0.1em] text-ink">
+                <span className="tabular t-label text-[15px] text-ink">
                   {formatPrice(subtotal)}
                 </span>
               </div>
@@ -194,7 +194,8 @@ export function CartDrawer() {
               </p>
 
               <Button
-                className="mt-5 w-full"
+                tone="solid"
+                className="mt-6 w-full"
                 disabled={checkingOut}
                 onClick={() => setCheckingOut(true)}
               >
@@ -241,7 +242,7 @@ function QtyButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="flex h-9 w-9 items-center justify-center text-body transition-colors duration-300 hover:text-ink disabled:cursor-not-allowed disabled:text-hairline-strong"
+      className="flex h-9 w-9 items-center justify-center text-body transition-colors duration-300 hover:text-gold-ink disabled:cursor-not-allowed disabled:text-hairline-strong"
     >
       {children}
     </button>
@@ -251,8 +252,8 @@ function QtyButton({
 function EmptyBag({ onClose }: { onClose: () => void }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-10 text-center">
-      <div className="h-px w-12 bg-hairline-strong" />
-      <p className="t-display mt-8 text-[18px]">Your bag is empty</p>
+      <span aria-hidden className="rule-gold w-12" />
+      <p className="t-display mt-8 text-[22px]">Your bag is empty</p>
       <p className="t-body mt-4 text-[14px] leading-relaxed text-muted">
         Six compositions, none of them a version of another. Start with the discovery set
         if you have not worn the house before.
@@ -260,7 +261,7 @@ function EmptyBag({ onClose }: { onClose: () => void }) {
       <Link
         href="/collection"
         onClick={onClose}
-        className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-ink underline underline-offset-[6px] transition-opacity duration-300 hover:opacity-60"
+        className="t-label mt-8 text-[11px] text-gold-ink underline underline-offset-[6px] transition-colors duration-300 hover:text-ink"
       >
         View the collection
       </Link>

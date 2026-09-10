@@ -15,7 +15,9 @@ export function FragranceCard({
 
   return (
     <Link href={`/fragrance/${fragrance.slug}`} className="group block">
-      <div className="frame-oval relative aspect-[4/5] overflow-hidden bg-surface-card">
+      {/* The gold ring is an outline rather than a border so it follows the
+          oval instead of being clipped to a sliver at the edges. */}
+      <div className="frame-circle relative overflow-hidden bg-surface-card outline-offset-[6px] outline-gold/0 transition-[outline-color] duration-700 group-hover:outline group-hover:outline-1 group-hover:outline-gold/60">
         <Image
           src={fragrance.images[0]}
           alt={`${fragrance.name} — ${fragrance.concentration}`}
@@ -24,25 +26,23 @@ export function FragranceCard({
           sizes={sizes}
           className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
         />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-canvas/0 transition-colors duration-700 group-hover:bg-canvas/20"
-        />
       </div>
 
-      <div className="mt-6 flex items-baseline justify-between gap-4">
-        <h3 className="t-display text-[19px] sm:text-[21px]">
+      <div className="mt-7 flex items-baseline justify-between gap-4">
+        <h3 className="t-display text-[22px] transition-colors duration-500 group-hover:text-gold-ink sm:text-[24px]">
           {fragrance.name}
         </h3>
-        <span className="tabular shrink-0 font-mono text-[12px] tracking-[0.1em] text-body">
+        <span className="tabular t-label shrink-0 text-[12px] text-body">
           {formatPrice(fragrance.price)}
         </span>
       </div>
 
-      <p className="mt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-muted">
+      <span aria-hidden className="rule-gold mt-4" />
+
+      <p className="t-label mt-4 text-[11px] leading-[1.9] text-muted">
         {notes.join(" · ")}
       </p>
-      <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-soft">
+      <p className="t-label mt-1.5 text-[11px] text-muted-soft">
         {fragrance.concentration} · {fragrance.sizeMl}ml
       </p>
     </Link>
