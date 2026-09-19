@@ -100,6 +100,15 @@ export function SiteFooter() {
             Genderless throughout. Never tested on animals.
           </p>
         </div>
+
+        <p className="mt-6">
+          <a
+            href="https://hasbiyallahu.xyz"
+            className="t-body whitespace-nowrap text-[11px] text-body opacity-60 transition-opacity duration-300 hover:underline hover:opacity-100"
+          >
+            Site by Hasbiyallahu
+          </a>
+        </p>
       </div>
     </footer>
   );
